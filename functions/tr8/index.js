@@ -19,10 +19,10 @@ const dropSchemaUid = "0xbc6da0b0e818da22c205bca49549ecd10cd57015b43230cb5a6d808
 const mintSchemaUid = "0xb83960e8eb89cebe08ffd35e9a405ead3ae353608f6c673da898f9ed8cfc739a";
 const graphQLAPI = "https://optimism-goerli-bedrock.easscan.org/graphql";
 
-var eas, tr8, transporter;
+var provider, eas, tr8, transporter;
 
 function getContracts() {
-    const provider = new ethers.providers.JsonRpcProvider({"url": process.env.API_URL_OPTIGOERLI});
+    provider = new ethers.providers.JsonRpcProvider({"url": process.env.API_URL_OPTIGOERLI});
     eas = new ethers.Contract(process.env.EAS_ADDRESS, easJSON.abi, provider);
     tr8 = new ethers.Contract(process.env.TR8_ADDRESS, tr8JSON.abi, provider);
     transporter = new ethers.Contract(process.env.TR8TRANSPORTER_ADDRESS, transporterJSON.abi, provider);
@@ -167,6 +167,7 @@ api.get("/api", async function (req, res) {
 
 api.get("/api/latest/drops", async function (req, res) {
     getContracts();
+    const signer = new ethers.Wallet(process.env.TR8_PRIVATE, provider);
     const attestations = await getAttestations(dropSchemaUid);
     for (let i = 0; i < attestations.length; i++) {
         const attestation = attestations[i];
@@ -216,6 +217,44 @@ api.get("/api/tr8/:tokenId", async function (req, res) {
     const nft = await tr8.nftForDrop(attestation.id);
     attestation.nftAddresss = nft;
     attestation.tokenId = req.params.tokenId;
+    return res.json(attestation);
+});
+
+// TODO: change to POST
+api.get("/api/claim/:uid", async function (req, res) {
+    getContracts();
+    const nft = await tr8.nftForDrop(req.params.uid);
+    const attestation = await getAttestation(req.params.uid);
+    attestation.nftAddresss = nft;
+    const recipient = req.q.recipient;
+    const secret = req.q.secret;
+    if (secret != process.env.SECRET) {
+        return res.status(401).json({"error": "unauthorized"});
+    }
+    const signer = new ethers.Wallet(process.env.TR8_PRIVATE, provider);
+    const mint = true;
+    const extras = [
+        {"key": "foo", "value": "bar"}
+    ];
+    const data = ethers.utils.defaultAbiCoder.encode(["bool", "tuple(string key, string value)[]"], [mint, extras]);
+    const attestationRequestData = {
+        "recipient": recipient, // gets the TR8
+        "expirationTime": 0,
+        "revocable": true,
+        "refUID": req.params.uid, // IMPORTANT: the attestation UID of the drop
+        "data": data,
+        "value": 0
+    };
+    const attestationRequest = {
+        "schema": mintSchemaUid,
+        "data": attestationRequestData
+    };
+    const txn = await eas.connect(signer).attest(attestationRequest);
+    const { events } = await txn.wait();
+    const attestedEvent = events.find(x => x.event === "Attested");
+    const mintAttestationUid = attestedEvent.args[2];
+    attestation.tokenId = ethers.BigNumber.from(mintAttestationUid).toString();
+    console.log(mintAttestationUid);
     return res.json(attestation);
 });
 
