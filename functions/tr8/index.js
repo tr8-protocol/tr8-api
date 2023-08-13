@@ -184,9 +184,10 @@ api.get("/api/latest/mints", async function (req, res) {
     getContracts();
     const attestations = await getAttestations(mintSchemaUid);
     for (let i = 0; i < attestations.length; i++) {
-        const attestation = attestations[i];
-        //const data = JSON.parse(attestation.decodedDataJson);
-        //attestations[i].parsedData = data;
+        const attestation = await getAttestation(attestations[i].refUID);
+        //const attestation = attestations[i];
+        const data = JSON.parse(attestation.decodedDataJson);
+        attestations[i].data = cleanUp(data);
         delete attestations[i].decodedDataJson;
         const nft = await tr8.nftForDrop(attestation.refUID);
         attestations[i].nftAddresss = nft;

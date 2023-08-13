@@ -1,1 +1,573 @@
-tr8
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <title>TR8 Events</title>
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.css">
+    <!-- ico-font-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/icofont.css">
+    <!-- Themify icon-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/themify.css">
+    <!-- Flag icon-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/flag-icon.css">
+    <!-- Feather icon-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/feather-icon.css">
+    <!-- Plugins css start-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/slick.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/animate.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/photoswipe.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/rating.css">
+    <!-- Plugins css Ends-->
+    <!-- Bootstrap css-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/bootstrap.css">
+    <!-- App css-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <link id="color" rel="stylesheet" href="/assets/css/color-1.css" media="screen">
+    <!-- Responsive css-->
+    <link rel="stylesheet" type="text/css" href="/assets/css/responsive.css">
+
+    <style>
+      .user-profile .hovercard .cardheader.none {
+        background: grey;
+        height: 100px;
+      }
+      .user-profile .hovercard .info .title a {
+        text-transform: none;
+      }
+      .title-address {
+        margin-top: -60px;
+        margin-bottom: 30px;
+      }
+      .badge-type {
+        font-size: 0.75rem;
+      }
+      .user-profile hr {
+        margin: 0px 0 20px;
+      }
+      .follow {
+        margin-bottom: 20px;
+      }
+      .social-icon {
+        height: 32px;
+      }
+      .socials li {
+        display: none;
+      }
+      .nft-icons {
+        height: 64px;
+      }
+      .connected-avatar {
+        height: 35px;
+      }
+    </style>
+  </head>
+  <body> 
+    <!-- loader starts-->
+    <div class="loader-wrapper">
+      <div class="loader-index"> <span></span></div>
+      <svg>
+        <defs></defs>
+        <filter id="goo">
+          <fegaussianblur in="SourceGraphic" stddeviation="11" result="blur"></fegaussianblur>
+          <fecolormatrix in="blur" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"> </fecolormatrix>
+        </filter>
+      </svg>
+    </div>
+    <!-- loader ends-->
+    <!-- tap on top starts-->
+    <div class="tap-top"><i data-feather="chevrons-up"></i></div>
+    <!-- tap on tap ends-->
+    <!-- page-wrapper Start-->
+    <div class="page-wrapper compact-wrapper" id="pageWrapper">
+      <!-- Page Header Start-->
+      <div class="page-header">
+        <div class="header-wrapper row m-0">
+          <form class="form-inline search-full col" action="#" method="get">
+            <div class="form-group w-100">
+              <div class="Typeahead Typeahead--twitterUsers">
+                <div class="u-posRelative">
+                  <input id="search" class="demo-input Typeahead-input form-control-plaintext w-100" type="text" placeholder="0x Address .." name="q" title="" autofocus>
+                  <div class="spinner-border Typeahead-spinner" role="status"><span class="sr-only">Loading...</span></div><i class="close-search" data-feather="x"></i>
+                </div>
+                <div class="Typeahead-menu"></div>
+              </div>
+            </div>
+          </form>
+          <div class="header-logo-wrapper col-auto p-0">
+            <div class="logo-wrapper"><a href="/"><img class="img-fluid" src="/assets/images/logo/logo.png" alt=""></a></div>
+            <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i></div>
+          </div>
+
+          <div class="nav-right col-xxl-7 col-xl-6 col-md-7 col-8 pull-right right-header p-0 ms-auto">
+            <ul class="nav-menus">
+
+              <li>                         <span class="header-search">
+                  <svg>
+                    <use href="/assets/svg/icon-sprite.svg#search"></use>
+                  </svg></span></li>
+
+              <li>
+                <div class="mode">
+                  <svg>
+                    <use href="/assets/svg/icon-sprite.svg#moon"></use>
+                  </svg>
+                </div>
+              </li>
+
+              <li class="profile-nav onhover-dropdown pe-0 py-0">
+                <div class="media profile-media"><img class="b-r-10 connected-avatar" src="/assets/images/dashboard/profile.png" alt="">
+                  <div class="media-body">
+                    <span class="connected-address">Connect</span>
+                  </div>
+                </div>
+                <ul class="profile-dropdown onhover-show-div">
+                  <li><a href="#" class="connect"><i data-feather="log-in"> </i><span>Connect</span></a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <script class="result-template" type="text/x-handlebars-template">
+            <div class="ProfileCard u-cf">                        
+            <div class="ProfileCard-avatar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay m-0"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></div>
+            <div class="ProfileCard-details">
+            <div class="ProfileCard-realName">{{name}}</div>
+            </div>
+            </div>
+          </script>
+          <script class="empty-template" type="text/x-handlebars-template"><div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div></script>
+        </div>
+      </div>
+      <!-- Page Header Ends                              -->
+      <!-- Page Body Start-->
+      <div class="page-body-wrapper">
+        <!-- Page Sidebar Start-->
+        <div class="sidebar-wrapper" sidebar-layout="stroke-svg">
+          <div>
+            <div class="logo-wrapper"><a href="index.html"><img class="img-fluid for-light" src="/assets/images/logo/logo.png" alt=""><img class="img-fluid for-dark" src="/assets/images/logo/logo_dark.png" alt=""></a>
+              <div class="back-btn"><i class="fa fa-angle-left"></i></div>
+              <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
+            </div>
+            <div class="logo-icon-wrapper"><a href="index.html"><img class="img-fluid" src="/assets/images/logo/logo-icon.png" alt=""></a></div>
+            <nav class="sidebar-main">
+              <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
+              <div id="sidebar-menu">
+                <ul class="sidebar-links" id="simple-bar">
+                  <li class="back-btn"><a href="index.html"><img class="img-fluid" src="/assets/images/logo/logo-icon.png" alt=""></a>
+                    <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i></div>
+                  </li>
+                  <li class="pin-title sidebar-main-title">
+                    <div> 
+                      <h6>Pinned</h6>
+                    </div>
+                  </li>
+                  <li class="sidebar-main-title">
+                    <div>
+                      <h6>TR8</h6>
+                    </div>
+                  </li>
+                  <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav" href="/">
+                    <svg class="stroke-icon">
+                      <use href="/assets/svg/icon-sprite.svg#stroke-home"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="/assets/svg/icon-sprite.svg#fill-home"></use>
+                    </svg><span>Latest Drops</span></a>
+                  </li>
+
+                  <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a id="menu-search" class="sidebar-link sidebar-title link-nav" href="#">
+                    <svg class="stroke-icon">
+                      <use href="/assets/svg/icon-sprite.svg#stroke-search"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="/assets/svg/icon-sprite.svg#fill-search"></use>
+                    </svg><span>Search</span></a>
+                  </li>
+
+                  <li class="sidebar-list"><i class="fa fa-thumb-tack"></i>
+                    <label class="badge badge-light-primary">5</label><a class="sidebar-link sidebar-title" href="#">
+                      <svg class="stroke-icon">
+                        <use href="/assets/svg/icon-sprite.svg#stroke-user"></use>
+                      </svg>
+                      <svg class="fill-icon">
+                        <use href="/assets/svg/icon-sprite.svg#fill-user"></use>
+                      </svg><span>Example Drops          </span></a>
+                    <ul class="sidebar-submenu">
+                      <li><a href="/drop/uid">Big Event</a></li>
+
+                    </ul>
+                  </li>
+
+                  <li class="sidebar-main-title">
+                    <div>
+                      <h6>Utility</h6>
+                    </div>
+                  </li>
+                  <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title" href="#">
+                      <svg class="stroke-icon">
+                        <use href="/assets/svg/icon-sprite.svg#stroke-social"></use>
+                      </svg>
+                      <svg class="fill-icon">
+                        <use href="/assets/svg/icon-sprite.svg#fill-social"></use>
+                      </svg><span>Network</span></a>
+                    <ul class="sidebar-submenu">
+                      <li><a href="#" id="add-network">Add Network</a></li>
+                      <li><a href="#" class="connect">Connect</a></li>
+                    </ul>
+                  </li>
+
+                  <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav" href="https://github.com/orgs/tr8-protocol/repositories">
+                    <svg class="stroke-icon">
+                      <use href="/assets/svg/icon-sprite.svg#stroke-others"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="/assets/svg/icon-sprite.svg#fill-others"></use>
+                    </svg><span>Github</span></a>
+                  </li>
+
+                  <li class="sidebar-list"><i class="fa fa-thumb-tack"></i><a class="sidebar-link sidebar-title link-nav" href="https://youtube.com/tbd">
+                    <svg class="stroke-icon">
+                      <use href="/assets/svg/icon-sprite.svg#stroke-blog"></use>
+                    </svg>
+                    <svg class="fill-icon">
+                      <use href="/assets/svg/icon-sprite.svg#fill-blog"></use>
+                    </svg><span>Demo Video</span></a>
+                  </li>
+
+
+
+                 
+                </ul>
+              </div>
+              <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
+            </nav>
+          </div>
+        </div>
+        <!-- Page Sidebar Ends-->
+        <div class="page-body">
+          <div class="container-fluid">
+            <div class="page-title">
+              <div class="row">
+                <div class="col-6">
+                  <h3 id="profile-title">TR8 Events</h3>
+                </div>
+                <div class="col-6">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">                                       
+                        <svg class="stroke-icon">
+                          <use href="/assets/svg/icon-sprite.svg#stroke-home"></use>
+                        </svg></a></li>
+                    <li id="site-section" class="breadcrumb-item">Drops</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Container-fluid starts-->
+          <div class="container-fluid">
+
+
+            <div id="tr8-mints" class="user-profile social-app-profile">
+              <div class="row">
+                <!-- user profile first-style start-->
+                <div class="col-sm-12 box-col-12">
+                  <div class="card hovercard text-center">
+                    <div class="cardheader socialheader none"></div>
+                    <div class="user-image">
+                      <div class="avatar"><img alt="" id="profile-avatar" data-address="" src="/images/tr8.png"></div>
+
+                    </div>
+                    <div class="info market-tabs p-0">
+                      <ul class="nav nav-tabs border-tab tabs-scoial" id="top-tab" role="tablist">
+                        <li class="nav-item"><a class="nav-link active" id="top-nfts" data-bs-toggle="tab" href="#nfts" role="tab" aria-controls="nfts" aria-selected="true">Drops</a></li>
+                        <li class="nav-item">
+                          <div class="user-designation"></div>
+                          <div class="title"><a target="_blank" id="profile-name" href="">TR8 Events</a></div>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" id="top-poaps" data-bs-toggle="tab" href="#poaps" role="tab" aria-controls="poaps" aria-selected="false">TR8s</a></li>
+                      </ul>
+                    </div>
+                    <hr>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-content" id="top-tabContent">
+
+                <!-- Reviews -->
+                <div class="tab-pane fade" id="timeline" role="tabpanel" aria-labelledby="timeline">
+                  <div class="row">
+
+                    <div class="col-xl-12 xl-100 col-lg-12 col-md-7 box-col-12">
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div class="card">
+                            <div class="card-body">
+
+                                <div id="profile-reviews" class="social-chat">
+                                  
+                                </div>
+
+                              <!--</div> -->
+                            </div>
+                          </div>
+
+
+                          <div class="card">
+                            <div class="card-header">
+                              <h4>Create an Event</h4>
+                              <p class="f-m-light mt-1">
+                                 Enter the details for your event TR8 drop.</p>
+                            </div>
+                            <div class="card-body">
+                              <div class="card-wrapper border rounded-3">
+                                <form class="row g-3">
+                                  <div class="col-md-12">
+                                    <label class="form-label" for="nameSpace">Namespace</label>
+                                    <input class="form-control" id="nameSpace" type="text" placeholder="Enter optional Namespace">
+                                  </div>
+                                  <div class="col-md-12">
+                                    <label class="form-label" for="name">Event Name</label>
+                                    <input class="form-control" id="name" type="text" placeholder="Name of event">
+                                  </div>
+                                  <div class="col-md-12">
+                                    <label class="form-label" for="symbol">Symbol</label>
+                                    <input class="form-control" id="symbol" type="text" placeholder="Enter symbol for NFT">
+                                  </div>
+                                  <div class="col-md-12">
+                                    <label class="form-label" for="image">Image URL</label>
+                                    <input class="form-control" id="image" type="text" placeholder="Enter http:// or ipfs:// url to image">
+                                  </div>
+                                  <div class="col-md-12">
+                                    <label class="form-label" for="description">Description</label>
+                                    <textarea class="form-control" id="description" placeholder="Describe the event"></textarea>
+                                  </div>
+                                  <div class="col-md-12">
+                                    <label class="form-label" for="city">City</label>
+                                    <input class="form-control" id="city" type="text" placeholder="City where event took place">
+                                  </div>
+                                  <div class="col-md-12">
+                                    <label class="form-label" for="country">Country</label>
+                                    <input class="form-control" id="country" type="text" placeholder="Country where event took place">
+                                  </div>
+                                  <div class="col-md-12">
+                                    <label class="form-label" for="eventURL">Event URL</label>
+                                    <input class="form-control" id="eventURL" type="text" placeholder="https://">
+                                  </div>
+                                  <div class="col-md-12">
+                                    <label class="form-label" for="admins">Admins</label>
+                                    <textarea class="form-control" id="admins" placeholder="Comma-sperated list of addresses"></textarea>
+                                  </div>
+                                  <div class="col-md-12">
+                                    <label class="form-label" for="claimers">Allow List</label>
+                                    <textarea class="form-control" id="claimers" placeholder="Comma-sperated list of addresses"></textarea>
+                                  </div>
+                                  <div class="col-12">
+                                    <div class="form-check checkbox-checked">
+                                      <input class="form-check-input" id="allowTranfers" type="checkbox">
+                                      <label class="form-check-label" for="allowTranfers">Allow Transfers (leave unchecked for Soulbound)</label>
+                                    </div>
+                                  </div>
+                                  <div class="col-12">
+                                    <button id="drop-button" data-address="" class="btn btn-primary" type="submit">Connect</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div> <!-- added by mark -->
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <!--</div> -->
+
+                <!-- NFTs -->
+                <div class="tab-pane fade show active" id="nfts" role="tabpanel" aria-labelledby="nfts">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="card">
+                        <div id="profile-nfts" class="my-gallery card-body row gallery-with-description" data-pswp-uid="nfts" itemscope="">
+                          
+                        
+                        </div>
+                        <!-- Root element of PhotoSwipe. Must have class pswp.-->
+                        <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+                          <!--
+                          Background of PhotoSwipe.
+                          It's a separate element, as animating opacity is faster than rgba().
+                          -->
+                          <div class="pswp__bg"></div>
+                          <!-- Slides wrapper with overflow:hidden.-->
+                          <div class="pswp__scroll-wrap">
+                            <!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory.-->
+                            <!-- don't modify these 3 pswp__item elements, data is added later on.-->
+                            <div class="pswp__container">
+                              <div class="pswp__item"></div>
+                              <div class="pswp__item"></div>
+                              <div class="pswp__item"></div>
+                            </div>
+                            <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed.-->
+                            <div class="pswp__ui pswp__ui--hidden">
+                              <div class="pswp__top-bar">
+                                <!-- Controls are self-explanatory. Order can be changed.-->
+                                <div class="pswp__counter"></div>
+                                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                                <button class="pswp__button pswp__button--share" title="Share"></button>
+                                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR-->
+                                <!-- element will get class pswp__preloader--active when preloader is running-->
+                                <div class="pswp__preloader">
+                                  <div class="pswp__preloader__icn">
+                                    <div class="pswp__preloader__cut">
+                                      <div class="pswp__preloader__donut"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                                <div class="pswp__share-tooltip"></div>
+                              </div>
+                              <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+                              <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+                              <div class="pswp__caption">
+                                <div class="pswp__caption__center"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TR8s -->
+                <div class="tab-pane fade" id="poaps" role="tabpanel" aria-labelledby="poaps">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="card">
+                        <div id="profile-poaps" class="my-gallery card-body row gallery-with-description" data-pswp-uid="poaps" itemscope="">
+                         
+                         
+                        </div>
+                        <!-- Root element of PhotoSwipe. Must have class pswp.-->
+                        <div class="pswpX" tabindex="-1" role="dialog" aria-hidden="true">
+                          <!--
+                          Background of PhotoSwipe.
+                          It's a separate element, as animating opacity is faster than rgba().
+                          -->
+                          <div class="pswp__bg"></div>
+                          <!-- Slides wrapper with overflow:hidden.-->
+                          <div class="pswp__scroll-wrap">
+                            <!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory.-->
+                            <!-- don't modify these 3 pswp__item elements, data is added later on.-->
+                            <div class="pswp__container">
+                              <div class="pswp__item"></div>
+                              <div class="pswp__item"></div>
+                              <div class="pswp__item"></div>
+                            </div>
+                            <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed.-->
+                            <div class="pswp__ui pswp__ui--hidden">
+                              <div class="pswp__top-bar">
+                                <!-- Controls are self-explanatory. Order can be changed.-->
+                                <div class="pswp__counter"></div>
+                                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                                <button class="pswp__button pswp__button--share" title="Share"></button>
+                                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR-->
+                                <!-- element will get class pswp__preloader--active when preloader is running-->
+                                <div class="pswp__preloader">
+                                  <div class="pswp__preloader__icn">
+                                    <div class="pswp__preloader__cut">
+                                      <div class="pswp__preloader__donut"></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                                <div class="pswp__share-tooltip"></div>
+                              </div>
+                              <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+                              <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+                              <div class="pswp__caption">
+                                <div class="pswp__caption__center"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- Container-fluid Ends-->
+        </div>
+        <!-- footer start-->
+        <footer class="footer">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12 footer-copyright text-center">
+                <p class="mb-0">TR8 Events - powered by EAS and TR8 Protocol</p>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- latest jquery-->
+    <script src="/assets/js/jquery.min.js"></script>
+    <!-- Bootstrap js-->
+    <script src="/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <!-- feather icon js-->
+    <script src="/assets/js/icons/feather-icon/feather.min.js"></script>
+    <script src="/assets/js/icons/feather-icon/feather-icon.js"></script>
+    <!-- scrollbar js-->
+    <script src="/assets/js/scrollbar/simplebar.js"></script>
+    <script src="/assets/js/scrollbar/custom.js"></script>
+    <!-- Sidebar jquery-->
+    <script src="/assets/js/config.js"></script>
+    <!-- Plugins JS start-->
+    <script src="/assets/js/sidebar-menu.js"></script>
+    <script src="/assets/js/sidebar-pin.js"></script>
+    <script src="/assets/js/slick/slick.min.js"></script>
+    <script src="/assets/js/slick/slick.js"></script>
+    <script src="/assets/js/header-slick.js"></script>
+    <script src="/assets/js/counter/jquery.waypoints.min.js"></script>
+    <script src="/assets/js/counter/jquery.counterup.min.js"></script>
+    <script src="/assets/js/counter/counter-custom.js"></script>
+    <script src="/assets/js/photoswipe/photoswipe.min.js"></script>
+    <script src="/assets/js/photoswipe/photoswipe-ui-default.min.js"></script>
+    <script src="/assets/js/photoswipe/photoswipe.js"></script>
+    <script src="/assets/js/rating/jquery.barrating.js"></script>
+    <script src="/assets/js/rating/rating-script.js?v=5"></script>
+    <script src="/assets/js/rating/emoji_rating.js"></script>
+    <script src="/assets/js/tooltip-init.js"></script>
+    <!-- Plugins JS Ends-->
+    <!-- Theme js-->
+    <script src="/assets/js/script.js"></script>
+
+    <!-- Rep3 JS -->
+    <script src="https://cdn.ethers.io/lib/ethers-5.1.umd.min.js" type="text/javascript"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/@alch/alchemy-web3@latest/dist/alchemyWeb3.min.js"></script>
+    <script src="/js/abis.js?v=2"></script>
+    <script src="/js/dapp.js?v=17"></script>
+  </body>
+</html>
