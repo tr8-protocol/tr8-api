@@ -136,6 +136,14 @@ async function renderLatestDrops(attestations) {
     for (let i = 0; i < attestations.length; i++) {
         $("#profile-nfts").append( getNftHTML(attestations[i]) );
     }
+    $(".claim").click(async function(e){
+        console.log("claim");
+        e.preventDefault();
+        var uid = $(this).data("uid");
+        console.log(uid);
+        claim(uid);
+        return false;
+    });
 }
 
 async function renderLatestTr8s(attestations) {
@@ -244,6 +252,18 @@ async function creatDrop(d) {
     window.location = `/drop/${attestationUid}`;
 }
 
+async function claim(uid) {
+    const res = await fetch(`https://api.tr8.me/api/claim/${uid}?secret=superhack&recipient=${accounts[0]}`, { 
+        method: 'GET', 
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    var resp = await res.json();
+    alert("Claimed!")
+}
+
+
 function ipfsToHttp(ipfs) {
     var http = "";
     var cid = ipfs.replace("ipfs://", "");
@@ -273,7 +293,7 @@ function getNftHTML(data) {
             <figcaption itemprop="caption description">
                 <h4>${nft.data.name}</h4>
                 <p>${nft.data.description}</p>
-                <a title="CLAIM THIS TR8!" href="#"><img  src="https://api.tr8.me/images/tr8.png" data-uid="${nft.id}" class="nft-icons claim" /></a>
+                <a title="CLAIM THIS TR8!" class="" data-uid="${nft.id}" href="https://api.tr8.me/api/claim/${nft.id}?secret=superhack&recipient=${accounts[0]}"><img  src="https://api.tr8.me/images/tr8.png"  class="nft-icons" /></a>
                 <a href="${explorerUrl}" target="_blank"><img src="https://api.tr8.me/images/${explorerImage}" class="nft-icons" /></a>
             </figcaption>
         </figure>
@@ -346,6 +366,15 @@ $( document ).ready(function() {
             "allowTransfers": false
         };
         creatDrop(data);
+        return false;
+    });
+
+    $( "#profile-nfts" ).on( "click", ".claim", async function(e) {
+        console.log("claim");
+        e.preventDefault();
+        var uid = $(this).data("uid");
+        console.log(uid);
+        claim(uid);
         return false;
     });
 

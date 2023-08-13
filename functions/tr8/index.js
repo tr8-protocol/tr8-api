@@ -258,7 +258,8 @@ api.get("/api/claim/:uid", async function (req, res) {
     console.log(mintAttestationUid);
     attestation.data = cleanUp(JSON.parse(attestation.decodedDataJson));
     delete attestation.decodedDataJson;
-    return res.json(attestation);
+    const opensea = `https://testnets.opensea.io/assets/optimism-goerli/${nft}/${attestation.tokenId}`;
+    return res.redirect(opensea);
 });
 
 api.post("/api/drop/new", async function (req, res) {
