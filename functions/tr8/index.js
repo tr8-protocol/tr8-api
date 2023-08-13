@@ -255,6 +255,91 @@ api.get("/api/claim/:uid", async function (req, res) {
     const mintAttestationUid = attestedEvent.args[2];
     attestation.tokenId = ethers.BigNumber.from(mintAttestationUid).toString();
     console.log(mintAttestationUid);
+    attestation.data = cleanUp(JSON.parse(attestation.decodedDataJson));
+    delete attestation.decodedDataJson;
+    return res.json(attestation);
+});
+
+api.post("/api/drop/new", async function (req, res) {
+    const q = req.q;
+    const nameSpace = q.nameSpace;
+    const name = q.name;
+    const symbol = q.symbol;
+    const description = q.description;
+    const image = q.image;
+    // each of the 5 elements of metadata is a string
+    const metadata = {
+        "nameSpace": nameSpace,
+        "name": name,
+        "symbol": symbol,
+        "description": description,
+        "image": image
+    };
+
+    // hook can be the zero address for no hook, or a contract address:
+    //const hook = "0x0000000000000000000000000000000000000000";  // no hook
+    const hook = q.hook ? q.hook : "0x0000000000000000000000000000000000000000";
+    //const hook = "0xFc3d67C7A95c1c051Db54608313Bd62E9Cd38A76"; // TR8HookStreamer
+    // claimers is an array of addresses that can claim a TR8 from the contract
+    const claimers = q.claimers ? q.claimers : [];
+    // the admins or issuers is an array of addresses that can issue TR8s to any address
+    // the attester (drop creator) does not need to be added here, as it will become an issuer
+    const admins = q.issuers ? q.issuers : [];
+    admins.push(q.creator);
+    const secret = "";  // unused, leave blank
+    // attributes is an array of key/value pairs, can be an empty array, but both key and value must be strings
+    const attributes = [
+        {
+            "key": "startDate",
+            "value": q.startDate
+        },
+        {
+            "key": "endDate",
+            "value": q.endDate
+        },
+        {
+            "key": "virtualEvent",
+            "value": q.virtualEvent
+        },
+        {
+            "key": "city",
+            "value": q.city
+        },
+        {
+            "key": "country",
+            "value": q.country
+        },
+        {
+            "key": "eventURL",
+            "value": q.eventURL
+        }
+    ];
+    // tags is an array of strings, can be an empty array
+    const tags = ["event"];
+    // allowTransfers is a boolean, true if the TR8 can be transferred, false if not
+    const allowTransfers = false;
+    const data = ethers.utils.defaultAbiCoder.encode(["tuple(string nameSpace, string name, string symbol, string description, string image)", "address", "address[]", "address[]", "string", "tuple(string key, string value)[]", "string[]", "bool"], [metadata, hook, claimers, admins, secret, attributes, tags, allowTransfers]);
+    const attestationRequestData = {
+        "recipient": process.env.TR8_ADDRESS,
+        "expirationTime": 0,  // 0 means no expiration, a unix timestamp can be used as and END date for minting
+        "revocable": false, // should be false for drop attestations
+        "refUID": ethers.constants.HashZero, // should be byte32 zero for drop attestations
+        "data": data,
+        "value": 0
+    };
+    const attestationRequest = {
+        "schema": dropSchemaUid,
+        "data": attestationRequestData
+    };
+    const signer = new ethers.Wallet(process.env.TR8_PRIVATE, provider);
+    const txn = await eas.connect(signer).attest(attestationRequest);
+    const { events } = await txn.wait();
+    const attestedEvent = events.find(x => x.event === "Attested");
+    const attestationUid = attestedEvent.args[2];
+    const attestation = await getAttestation(attestationUid);
+    attestation.data = cleanUp(JSON.parse(attestation.decodedDataJson));
+    delete attestation.decodedDataJson;
+    console.log(attestationUid);
     return res.json(attestation);
 });
 
